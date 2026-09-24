@@ -1,0 +1,61 @@
+### 1. Testar cadastro de cpf errado
+POST http://localhost:3000/ciclista
+Content-Type: application/json
+
+{
+    "nome": "Roberto",
+    "email": "roberto@gmail.com",
+    "senha": "abc",
+    "cpf": "123456789",
+    "endereco": "rua abc, 5",
+    "celular": "47912345678"
+}
+
+### 2. Testar cadastro do ciclista
+POST http://localhost:3000/ciclista
+Content-Type: application/json
+
+{
+    "nome": "Roberto",
+    "email": "roberto@gmail.com",
+    "senha": "abc",
+    "cpf": "12345678912",
+    "endereco": "rua abc, 5",
+    "celular": "47912345678"
+}
+
+### 3. Testar cadastro do ciclista
+POST http://localhost:3000/ciclista
+Content-Type: application/json
+
+{
+    "nome": "Marcos",
+    "email": "marcos@gmail.com",
+    "senha": "abc",
+    "cpf": "12345678912",
+    "endereco": "rua abc, 5",
+    "celular": "47912345678"
+}
+
+### 4. Testar cadastro do ciclista
+POST http://localhost:3000/ciclista
+Content-Type: application/json
+
+{
+    "nome": "Ana",
+    "email": "ana@gmail.com",
+    "senha": "abc",
+    "cpf": "12345678912",
+    "endereco": "rua abc, 5",
+    "celular": "47912345678"
+}
+
+### 5. FAzer Login do ciclista (Armazena o token automaticamente)
+# @name loginReq
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "email": "ana@gmail.com",
+    "senha": "abc"
+}

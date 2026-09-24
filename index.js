@@ -4,10 +4,12 @@ const cors = require('cors')
 
 const conn = require('./db/conn')
 
-// Controllers 
+// Controllers disponíveis
+const authController = require('./controller/auth.controller')
 const ciclistaController = require('./controller/ciclista.controller')
-const bicicletaController = require('./controller/bicicleta.controller')
-const agendamentoController = require('./controller/agendamento.controller')
+
+// Middleware de Autenticação
+const authMiddleware = require('./middleware/auth.middleware')
 
 const hostname = 'localhost' // 127.0.0.1
 const PORT = 3000
@@ -23,20 +25,15 @@ app.get('/', (req, res) => {
     res.json({ message: 'Aplicação rodando!' })
 })
 
+// ---- Rota de Autenticação / Login ----
+app.post('/login', authController.login)
+
 // ---- Rotas do Ciclista ----
-app.post('/ciclista', ciclistaController.cadastrar)
-app.get('/ciclista/:id', ciclistaController.consultar)
-app.get('/ciclistas', ciclistaController.listar)
-app.delete('/ciclista/:id', ciclistaController.apagar)
-app.put('/ciclista/:id', ciclistaController.atualizar)
-
-// ---- Rotas da Bicicleta ----
-app.post('/bicicleta', bicicletaController.cadastrar)
-
-// ---- Rotas do Agendamento ----
-app.post('/agendamento', agendamentoController.cadastrar)
-app.get('/agendamentos/ordenados', agendamentoController.listarOrdenado)
-app.put('/agendamento/:id', agendamentoController.atualizar)
+app.post('/ciclista', ciclistaController.cadastrar) // Cadastro livre
+app.get('/ciclista/:id', authMiddleware, ciclistaController.consultar)
+app.get('/ciclistas', authMiddleware, ciclistaController.listar)
+app.delete('/ciclista/:id', authMiddleware, ciclistaController.apagar)
+app.put('/ciclista/:id', authMiddleware, ciclistaController.atualizar)
 
 // --------------------------
 conn.sync()
