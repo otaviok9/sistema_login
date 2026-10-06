@@ -50,7 +50,7 @@ Content-Type: application/json
     "celular": "47912345678"
 }
 
-### 5. FAzer Login do ciclista (Armazena o token automaticamente)
+### 5. Fazer Login do ciclista (Armazena o token automaticamente)
 # @name loginReq
 POST http://localhost:3000/login
 Content-Type: application/json
@@ -59,3 +59,11 @@ Content-Type: application/json
     "email": "ana@gmail.com",
     "senha": "abc"
 }
+
+### 6. Consultar ciclista por ID (rota privada)
+GET http://localhost:3000/ciclista/1
+Authorization: {{loginReq.response.body.token}}
+
+### 7. Consultar ciclista por nome (rota privada)
+GET http://localhost:3000/ciclista/buscarNome/juan
+Authorization: {{loginReq.response.body.token}}
